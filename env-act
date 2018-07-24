@@ -1,0 +1,7 @@
+# General purpose script to activate python virtual environment:
+
+if [[ "$OSTYPE" == "msys" ]]; then  #WINDOWS
+    . env/Scripts/activate
+else                                #OSX / Linux
+    . env/bin/activate
+fi

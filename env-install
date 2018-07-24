@@ -1,0 +1,31 @@
+# General purpose script to create python virtual environment and install requirements
+
+if [ ! -d "env" ]; then
+  virtualenv env
+else
+    echo "VIRTUAL_ENV found"
+fi
+if [ ! -d "env" ]; then
+  echo "There was a problem creating the virtual environment, ...quitting"
+  exit 1
+fi
+
+if [[ "$OSTYPE" == "msys" ]]; then  #WINDOWS
+    . env/Scripts/activate
+else                                #OSX / Linux
+    . env/bin/activate
+fi
+
+if [[ -z "$VIRTUAL_ENV" ]]; then
+    echo "No VIRTUAL_ENV set, ...quitting"
+    exit 1
+else
+    echo "VIRTUAL_ENV is set"
+fi
+
+echo 'Installing MyBluePrint Requirements'
+pip install -r MyBluePrint/requirements.txt
+
+# Repeat the above two lines, for each further Blueprint you add:
+# echo 'Installing MyApp_ Requirements'
+# pip install -r MyApp/requirements.txt
