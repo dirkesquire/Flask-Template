@@ -1,0 +1,30 @@
+{% extends "MyBluePrint/_layout.html" %}
+{% block head %}
+    <title>Home Page</title>
+{% endblock %}
+{% block body %}
+
+<h1>Hello, World!</h1>
+
+<p>
+    {{ example }}
+</p>
+
+<p>
+    <a href="{{ url_for('.home') }}?example=Clicked!">Click me</a>
+</p>
+
+<p>
+    <a href="{{ url_for('.private') }}">Visit private page</a>
+</p>
+
+<p>
+    {% if not session.logged_in %}
+    <a href="{{ url_for('.login') }}">log in</a>
+    {% else %}
+    <a href="{{ url_for('.logout') }}">log out</a>
+    {% endif %}
+</p>
+
+{% endblock %}
+
