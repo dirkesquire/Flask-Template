@@ -18,6 +18,7 @@ def CreateTables():
 def SeedUsers():
     u = User.query.filter_by(email='user@demo.com').first()
     if u is None:
+        print('Creating Users')
         from Auth.Hashing import hash_password
         password = current_app.config['DEFAULT_SQLALCHEMY_PASSWORD']
         pw_hash = hash_password('user@demo.com', password)

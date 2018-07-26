@@ -18,7 +18,7 @@ def auth_error():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    print('Finance.Login')
+    print('Login')
     error = None
     username = request.form.get('username') or ''
     if request.method == 'POST':
@@ -36,7 +36,7 @@ def login():
             elif (user.pw_hash != pw_hash):
                 error = 'Wrong password'
             else:
-                session['logged_in'] = True
+                auth.perform_login(username)
                 flash('You were logged in')
                 user.logins = (user.logins or 0) + 1
                 user.last_login = datetime.today()
@@ -46,6 +46,6 @@ def login():
 
 @app.route('/logout')
 def logout():
-    session.pop('logged_in', None)
+    auth.perform_logout()
     flash('You were logged out')
     return redirect(url_for(LOGOUT_REDIRECT))
